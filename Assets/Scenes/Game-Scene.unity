@@ -462,8 +462,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::playerScript
   speed: 0.03
-  tail: {fileID: 0}
-  headPositions: []
+  tail: {fileID: 984490970}
+  prevPositions: []
+  tailPos: {x: 0, y: 0}
 --- !u!212 &1361226807
 SpriteRenderer:
   serializedVersion: 2
