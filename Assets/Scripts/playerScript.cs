@@ -6,11 +6,18 @@ public class playerScript : MonoBehaviour
 {
     private double length;
     public float speed;
-    public List<GameObject> prevPositions = new List<GameObject>();
+    
     private int direction;
+    
     public int fruitCount;
-    private int countBeforeResize;
-    public List<GameObject> fruits;
+    public GameObject[] fruits;
+    
+    private int countBeforeMapResize;
+
+    public GameObject turnPointPrefab;
+    public List<GameObject> turnPoints;
+    public bool gameStarted;
+    
     
     //1 = up
     //2 = down
@@ -22,6 +29,10 @@ public class playerScript : MonoBehaviour
         direction = 0;
         speed = 1.5f;
         fruitCount = 0;
+        gameStarted = false;
+        turnPoints = new List<GameObject>();
+        turnPoints.Add(gameObject);
+
     }
 
     // Update is called once per frame
@@ -36,21 +47,32 @@ public class playerScript : MonoBehaviour
         if ((Keyboard.current.upArrowKey.wasPressedThisFrame || Keyboard.current.wKey.wasPressedThisFrame) && direction != 2)
         {
             direction = 1;
+            gameStarted = true;
+            addPoint();
+            
         }
 
         if ((Keyboard.current.downArrowKey.wasPressedThisFrame || Keyboard.current.sKey.wasPressedThisFrame) && direction != 1)
         {
             direction = 2;
+            gameStarted = true;
+            addPoint();
+           
+            
         }
 
         if ((Keyboard.current.leftArrowKey.wasPressedThisFrame || Keyboard.current.aKey.wasPressedThisFrame) && direction != 4)
         {
             direction = 3;
+            gameStarted = true;
+            addPoint();
         }
         
         if ((Keyboard.current.rightArrowKey.wasPressedThisFrame || Keyboard.current.dKey.wasPressedThisFrame) && direction != 3)
         {
             direction = 4;
+            gameStarted = true;
+            addPoint();
         }
         
         if (direction == 1)
@@ -74,6 +96,16 @@ public class playerScript : MonoBehaviour
         }
         transform.position = newPos;
     }
+    
+    void moveTail()
+    {
+    }
+
+    void addPoint()
+    {
+        GameObject point = Instantiate(turnPointPrefab,transform.position,Quaternion.identity);
+        turnPoints.Insert(0, point);
+    }
 
     void OnCollisionEnter2D(Collision2D collision)
     {
@@ -82,6 +114,8 @@ public class playerScript : MonoBehaviour
             fruitCount += 1;
             print("fruit count: " + fruitCount);
             collision.gameObject.SetActive(false);
+            
+            
         }
 
         if (collision.gameObject.CompareTag("obstacle"))
@@ -95,5 +129,6 @@ public class playerScript : MonoBehaviour
         }
 
     }
+    
     
 }
