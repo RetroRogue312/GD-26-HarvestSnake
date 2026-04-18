@@ -8,6 +8,9 @@ public class playerScript : MonoBehaviour
     public float speed;
     public List<GameObject> prevPositions = new List<GameObject>();
     private int direction;
+    public int fruitCount;
+    private int countBeforeResize;
+    public List<GameObject> fruits;
     
     //1 = up
     //2 = down
@@ -18,6 +21,7 @@ public class playerScript : MonoBehaviour
     {
         direction = 0;
         speed = 1.5f;
+        fruitCount = 0;
     }
 
     // Update is called once per frame
@@ -71,9 +75,25 @@ public class playerScript : MonoBehaviour
         transform.position = newPos;
     }
 
-    void OnCollisionEnter(Collision collision)
+    void OnCollisionEnter2D(Collision2D collision)
     {
-        
+        if (collision.gameObject.CompareTag("fruit"))
+        {
+            fruitCount += 1;
+            print("fruit count: " + fruitCount);
+            collision.gameObject.SetActive(false);
+        }
+
+        if (collision.gameObject.CompareTag("obstacle"))
+        {
+            speed = 0.0f;
+            print("Game over");
+        }
+        if (collision.gameObject.CompareTag("special"))
+        {
+            //decrease snake's size.
+        }
+
     }
     
 }
