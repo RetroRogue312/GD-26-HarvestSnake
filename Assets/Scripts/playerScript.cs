@@ -232,10 +232,5 @@ public class playerScript : MonoBehaviour
             speed = 0.0f;
             print("Game over");
         }
-        if (collision.gameObject.CompareTag("citric"))
-        {
-            //decrease snake's size.
-        }
-
     }
 }
