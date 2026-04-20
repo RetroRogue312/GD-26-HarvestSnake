@@ -10,15 +10,15 @@ public class playerScript : MonoBehaviour
     
     public int fruitCount;
     public GameObject[] fruits;
-    private GameObject currentFruit;
-    private int fruitIndex;
+    public GameObject currentFruit;
+    public int fruitIndex;
     private int countBeforeSpeedUp;
     private int countBeforeEnemy;
     private int countBeforeOrange;
 
     public GameObject turnPointPrefab;
     public List<GameObject> turnPoints;
-    private bool gameStarted;
+    public bool gameStarted;
     public GameObject tail;
 
     public GameObject bodyPrefab;
@@ -49,7 +49,7 @@ public class playerScript : MonoBehaviour
         countBeforeOrange = 5;
 
         fruitIndex = Random.Range(0, fruits.Length);
-        currentFruit = fruits[0];
+        currentFruit = fruits[fruitIndex];
         currentFruit.SetActive(true);
         
 
@@ -70,7 +70,7 @@ public class playerScript : MonoBehaviour
 
         if (countBeforeSpeedUp == 0)
         {
-            speed += 0.5f;
+            speed += 2f;
             countBeforeSpeedUp = 5;
         }
 
@@ -246,7 +246,7 @@ public class playerScript : MonoBehaviour
         turnPoints.Insert(0, point);
         if (segments.Count > 4)
         {
-            if (segments[1].TryGetComponent<BoxCollider2D>(out BoxCollider2D collider))
+            if (segments[4].TryGetComponent<BoxCollider2D>(out BoxCollider2D collider))
             {
                 collider.enabled = true;
                 print("Collider enabled on segment 4!");
@@ -260,13 +260,24 @@ public class playerScript : MonoBehaviour
         if (collision.gameObject.CompareTag("fruit"))
         {
             fruitCount += 1;
+            collision.gameObject.SetActive(false);
+            if (collision.transform.parent != null && collision.transform.parent.CompareTag("trap"))
+            {
+                collision.transform.parent.gameObject.SetActive(false);
+            }
+            else
+            {
+                collision.gameObject.SetActive(false);
+            }
+            
             int newIndex = Random.Range(0, fruits.Length);
             
             while (newIndex == fruitIndex)
                 newIndex = Random.Range(0, fruits.Length);
-            fruits[fruitIndex].SetActive(false);
-            fruits[newIndex].SetActive(true);
+            
             fruitIndex = newIndex;
+            currentFruit = fruits[fruitIndex];
+            currentFruit.SetActive(true);
             
             
             print("fruit count: " + fruitCount);

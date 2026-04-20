@@ -554,6 +554,81 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2745442167426856073, guid: 2313d661783854a4ea6a92ae4ec25bef, type: 3}
   m_PrefabInstance: {fileID: 1611652238}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &307149944
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 307149945}
+  - component: {fileID: 307149947}
+  - component: {fileID: 307149946}
+  m_Layer: 5
+  m_Name: info
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &307149945
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 307149944}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1857811320}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &307149946
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 307149944}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &307149947
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 307149944}
+  m_CullTransparentMesh: 1
 --- !u!1 &352877073
 GameObject:
   m_ObjectHideFlags: 0
@@ -1329,8 +1404,8 @@ GameObject:
   m_Component:
   - component: {fileID: 658241048}
   - component: {fileID: 658241049}
-  - component: {fileID: 658241051}
   - component: {fileID: 658241050}
+  - component: {fileID: 658241051}
   m_Layer: 0
   m_Name: head
   m_TagString: Untagged
@@ -1392,8 +1467,11 @@ MonoBehaviour:
   - {fileID: 1578417357}
   - {fileID: 673525665}
   - {fileID: 109971753}
+  currentFruit: {fileID: 0}
+  fruitIndex: 0
   turnPointPrefab: {fileID: 1344918841660952770, guid: ef81b9febaa78064894d2ee0c8377fdf, type: 3}
   turnPoints: []
+  gameStarted: 0
   tail: {fileID: 1292839176}
   bodyPrefab: {fileID: 1479648528061321644, guid: e597c2f722a76ab4da017902cc1ad28a, type: 3}
   KeySounds:
@@ -1429,8 +1507,8 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 0
---- !u!58 &658241051
-CircleCollider2D:
+--- !u!61 &658241051
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -1463,8 +1541,18 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.006115079, y: 0}
-  m_Radius: 0.40827382
+  m_Offset: {x: -0.32860348, y: -0.01643017}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 0.17849118, y: 0.441374}
+  m_EdgeRadius: 0
 --- !u!1 &673525665 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1680945491184139253, guid: 8ec3387df74b7464180b269dc9cc4039, type: 3}
@@ -3519,7 +3607,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 307149945}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
