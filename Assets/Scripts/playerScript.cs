@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -322,8 +323,15 @@ public class playerScript : MonoBehaviour
             InputSystem.DisableDevice(Keyboard.current);
             ScoreHolder.instance.score = score;
             ScoreHolder.instance.best = bestScore;
+            StartCoroutine(RestartDelay());
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
+    }
+
+    IEnumerator RestartDelay()
+    {
+        yield return new WaitForSeconds(2f);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     public void OnPlay()

@@ -6,7 +6,6 @@ public class ScoreHolder : MonoBehaviour
 
     public int score;
     public int best;
-    
     public void Awake()
     {
         if (instance != null && instance != this)
