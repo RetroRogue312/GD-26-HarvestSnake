@@ -16,6 +16,8 @@ public class playerScript : MonoBehaviour
     private int countBeforeEnemy;
     private int countBeforeOrange;
 
+    public GameObject infoPanel;
+
     public GameObject turnPointPrefab;
     public List<GameObject> turnPoints;
     public bool gameStarted;
@@ -63,7 +65,10 @@ public class playerScript : MonoBehaviour
     {
         moveHead();
         moveTail();
-        
+        if (gameStarted)
+        {
+            infoPanel.SetActive(false);
+        }
         
         stretchCurrentSegment();
         shrinkOldestSegment();
@@ -260,7 +265,7 @@ public class playerScript : MonoBehaviour
         if (collision.gameObject.CompareTag("fruit"))
         {
             fruitCount += 1;
-            collision.gameObject.SetActive(false);
+            
             if (collision.transform.parent != null && collision.transform.parent.CompareTag("trap"))
             {
                 collision.transform.parent.gameObject.SetActive(false);
