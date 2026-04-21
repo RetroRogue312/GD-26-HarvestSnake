@@ -8,7 +8,6 @@ using UnityEngine.SceneManagement;
 public class playerScript : MonoBehaviour
 {
     public float speed;
-    
     private int direction;
     
     public int score;
@@ -23,8 +22,6 @@ public class playerScript : MonoBehaviour
     public GameObject currentFruit;
     public int fruitIndex;
     private int countBeforeSpeedUp;
-    private int countBeforeEnemy;
-    private int countBeforeOrange;
 
     public GameObject infoPanel;
 
@@ -59,8 +56,7 @@ public class playerScript : MonoBehaviour
         turnPoints = new List<GameObject>();
         segments = new List<GameObject>();
         countBeforeSpeedUp = 5;
-        countBeforeEnemy = 10;
-        countBeforeOrange = 5;
+
 
         fruitIndex = Random.Range(0, fruits.Length);
         currentFruit = fruits[fruitIndex];
@@ -91,11 +87,6 @@ public class playerScript : MonoBehaviour
         {
             speed += 2f;
             countBeforeSpeedUp = 5;
-        }
-
-        if (countBeforeOrange == 0)
-        {
-            
         }
     }
 
@@ -210,11 +201,6 @@ public class playerScript : MonoBehaviour
     void CreateSegment()
     {
         currentSegment = Instantiate(bodyPrefab);
-        
-        if (currentSegment.TryGetComponent<BoxCollider2D>(out BoxCollider2D collider))
-        {
-            collider.enabled = false; 
-        }
         segments.Insert(0, currentSegment);
     }
 
@@ -263,12 +249,14 @@ public class playerScript : MonoBehaviour
     {
         GameObject point = Instantiate(turnPointPrefab,transform.position,Quaternion.identity);
         turnPoints.Insert(0, point);
-        if (segments.Count > 4)
+        if (segments.Count >= 4)
         {
-            if (segments[4].TryGetComponent<BoxCollider2D>(out BoxCollider2D collider))
+            for (int i = 3; i < segments.Count; i++)
             {
-                collider.enabled = true;
-                print("Collider enabled on segment 4!");
+                if (segments[i].TryGetComponent<BoxCollider2D>(out BoxCollider2D collider))
+                {
+                    collider.enabled = true;
+                }
             }
         }
         CreateSegment();
@@ -309,8 +297,6 @@ public class playerScript : MonoBehaviour
             
             print("fruit count: " + score);
             growthBuffer += growthPerFruit;
-            countBeforeEnemy--;
-            countBeforeOrange--;
             countBeforeSpeedUp--;
 
         }
